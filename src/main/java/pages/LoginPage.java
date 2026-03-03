@@ -10,7 +10,8 @@ public class LoginPage {
     private final Locator locatorUsername;
     private final Locator locatorPassword;
     private final Locator locatorButton;
-    //private final Locator locatorMessage;
+    private final Locator locatorFlash;
+
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
 
@@ -19,6 +20,7 @@ public class LoginPage {
         this.locatorUsername =page.getByLabel("Username");
         this.locatorPassword = page.getByLabel("Password");
         this.locatorButton = page.getByLabel("Login");
+        this.locatorFlash = page.locator("#flash");
     }
 
     public LoginPage fill(String inputText, String text){
@@ -42,4 +44,19 @@ public class LoginPage {
         return this;
     }
 
+    public Locator getLocatorUsername() {
+        return locatorUsername;
+    }
+
+    public Locator getLocatorPassword() {
+        return locatorPassword;
+    }
+
+    public Locator getLocatorButton() {
+        return locatorButton;
+    }
+
+    public Locator getLocatorFlash() {
+        return locatorFlash;
+    }
 }
