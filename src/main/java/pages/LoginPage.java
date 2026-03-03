@@ -11,6 +11,8 @@ public class LoginPage {
     private final Locator locatorPassword;
     private final Locator locatorButton;
     //private final Locator locatorMessage;
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
 
     public LoginPage(Page page) {
         this.page = page;
@@ -19,6 +21,25 @@ public class LoginPage {
         this.locatorButton = page.getByLabel("Login");
     }
 
+    public LoginPage fill(String inputText, String text){
+        Locator locator = null;
+        switch (inputText){
+            case USERNAME:
+                locator = locatorUsername;
+                break;
+            case PASSWORD:
+                locator = locatorPassword;
+                break;
+        }
+        locator.click();
+        locator.clear();
+        locator.fill(text);
+        return this;
+    }
 
+    public LoginPage clickLoginButton(){
+        locatorButton.click();
+        return this;
+    }
 
 }
