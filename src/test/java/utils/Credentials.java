@@ -12,14 +12,14 @@ public class Credentials {
 
     private static final String FILE_PATH = "src/test/resources/credentials.json";
 
-    // Record interno para cada conjunto de credenciales
     public record Credential(String username, String password) {}
 
-    // Clase que mapea la estructura completa del JSON
     private record CredentialSets(
             Credential valid,
             Credential invalid_username,
             Credential invalid_password,
+            Credential no_username,
+            Credential no_password,
             Credential empty
     ) {}
 
@@ -37,5 +37,8 @@ public class Credentials {
     public static Credential valid()              { return sets.valid; }
     public static Credential invalidUsername()    { return sets.invalid_username; }
     public static Credential invalidPassword()    { return sets.invalid_password; }
+    public static Credential noUsername()    { return sets.no_username; }
+    public static Credential noPassword()    { return sets.no_password; }
     public static Credential empty()              { return sets.empty; }
+
 }

@@ -68,6 +68,38 @@ public class LoginLogoutTest extends BaseTest {
         assertThat(flash).isVisible();
         assertThat(flash).containsText("Your password is invalid!");
         assertThat(flash).hasCSS("background-color", ColorHelper.convertHexToIntForCSS("#c60f13"));
+
+
+    }
+
+    @Test
+    void testIncorrectLoginWithoutUser() {
+        var cred = Credentials.noUsername();
+
+        loginPage.fill(LoginPage.USERNAME, cred.username())
+                .fill(LoginPage.PASSWORD, cred.password())
+                .clickLoginButton();
+        Locator flash = loginPage.getLocatorFlash();
+        assertThat(flash).isVisible();
+        assertThat(flash).containsText("Your username is invalid!");
+        assertThat(flash).hasCSS("background-color", ColorHelper.convertHexToIntForCSS("#c60f13"));
+
+    }
+
+    @Test
+    void testIncorrectLoginWithoutPassword() {
+        var cred = Credentials.noPassword();
+
+        loginPage.fill(LoginPage.USERNAME, cred.username())
+                .fill(LoginPage.PASSWORD, cred.password())
+                .clickLoginButton();
+
+        Locator flash = loginPage.getLocatorFlash();
+        assertThat(flash).isVisible();
+        assertThat(flash).containsText("Your password is invalid!");
+        assertThat(flash).hasCSS("background-color", ColorHelper.convertHexToIntForCSS("#c60f13"));
+
+
     }
 
     @Test
