@@ -2,6 +2,7 @@ package pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 public class LoginPage {
 
@@ -19,7 +20,7 @@ public class LoginPage {
         this.page = page;
         this.locatorUsername =page.getByLabel("Username");
         this.locatorPassword = page.getByLabel("Password");
-        this.locatorButton = page.getByLabel("Login");
+        this.locatorButton = page.locator("button[type='submit'].radius");
         this.locatorFlash = page.locator("#flash");
     }
 
