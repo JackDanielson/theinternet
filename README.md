@@ -1,4 +1,4 @@
-# saucedemo
+# The Internet
 Test Suite de Playwright para https://the-internet.herokuapp.com/login
 
 ## Overview
