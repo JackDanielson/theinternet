@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import pages.SecurePage;
 import utils.ColorHelper;
+import utils.Credentials;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -28,8 +29,9 @@ public class LoginLogoutTest extends BaseTest {
 
     @Test
     void testCorrectLogin() {
-        loginPage.fill(LoginPage.USERNAME,"tomsmith")
-                .fill(LoginPage.PASSWORD, "SuperSecretPassword!")
+        var cred = Credentials.valid();
+        loginPage.fill(LoginPage.USERNAME, cred.username())
+                .fill(LoginPage.PASSWORD, cred.password())
                 .clickLoginButton();
         securePage = new SecurePage(page);
         assertThat(page).hasURL("https://the-internet.herokuapp.com/secure");
@@ -42,8 +44,10 @@ public class LoginLogoutTest extends BaseTest {
 
     @Test
     void testIncorrectLoginWrongUser() {
-        loginPage.fill(LoginPage.USERNAME,"misteranderson")
-                .fill(LoginPage.PASSWORD, "SuperSecretPassword!")
+        var cred = Credentials.invalidUsername();
+
+        loginPage.fill(LoginPage.USERNAME, cred.username())
+                .fill(LoginPage.PASSWORD, cred.password())
                 .clickLoginButton();
         Locator flash = loginPage.getLocatorFlash();
         assertThat(flash).isVisible();
@@ -54,8 +58,10 @@ public class LoginLogoutTest extends BaseTest {
 
     @Test
     void testIncorrectLoginWrongPassword() {
-        loginPage.fill(LoginPage.USERNAME,"tomsmith")
-                .fill(LoginPage.PASSWORD, "thisisnotthepassword")
+        var cred = Credentials.invalidPassword();
+
+        loginPage.fill(LoginPage.USERNAME, cred.username())
+                .fill(LoginPage.PASSWORD, cred.password())
                 .clickLoginButton();
 
         Locator flash = loginPage.getLocatorFlash();
